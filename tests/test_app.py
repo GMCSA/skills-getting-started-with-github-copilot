@@ -40,3 +40,8 @@ def test_signup_invalid_activity():
 def test_unregister_invalid_activity():
     response = client.post("/activities/Nonexistent/unregister?email=someone@mergington.edu")
     assert response.status_code == 404
+
+def test_root_redirect():
+    response = client.get("/")
+    assert response.status_code in (200, 307, 308)
+    # Should redirect to /static/index.html or serve it
